@@ -20,8 +20,8 @@ def show_category(request, category_name_slug):
 	try:
 		category = Category.objects.get(slug=category_name_slug)
 		pages = Page.objects.filter(category=category)
-		context_dict['pages'] = pages
 		context_dict['category'] = category
+		context_dict['pages'] = pages
 	except Category.DoesNotExist:
 		context_dict['category'] = None
 		context_dict['pages'] = None
@@ -37,7 +37,7 @@ def add_category(request):
 		if form.is_valid():
 			cat = form.save(commit=True)
 			print(cat, cat.slug)
-			return redirect('/rango/')
+			return redirect(reverse('rango:index'))
 		else:
 			print(form.errors)
 	return render(request, 'rango/add_category.html', {'form':form})
@@ -50,7 +50,7 @@ def add_page(request, category_name_slug):
 		category = None
 
 	if category is None:
-		return redirect('/rango/')
+		return redirect(reverse('rango:index'))
 
 	form = PageForm()
 
@@ -68,5 +68,5 @@ def add_page(request, category_name_slug):
 										kwargs={'category_name_slug': category_name_slug}))
 		else:
 			print(form.errors)
-	context_dict = {'form': form, 'category':category}
+	context_dict = {'form': form, 'category': category}
 	return render(request, 'rango/add_page.html', context_dict)
