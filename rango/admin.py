@@ -1,5 +1,5 @@
 from django.contrib import admin
-from rango.models import Category, Page
+from rango.models import Category, Page, UserProfile
 
 
 class TabPages(admin.TabularInline):
@@ -7,11 +7,13 @@ class TabPages(admin.TabularInline):
     fields = ["title", "url", "views"]
     extra = 1
 
+
 class CategoryAdmin(admin.ModelAdmin):
-#    fields = ["likes", "name", "views"]
+    # fields = ["likes", "name", "views"]
     prepopulated_fields = {"slug": ('name',)}
     inlines = [TabPages]
     list_display = ("name", "likes", "views")
+
 
 class PageAdmin(admin.ModelAdmin):
     list_display = ("title", "category", "url", "views")
@@ -19,3 +21,4 @@ class PageAdmin(admin.ModelAdmin):
 # Register the models here.
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Page, PageAdmin)
+admin.site.register(UserProfile)

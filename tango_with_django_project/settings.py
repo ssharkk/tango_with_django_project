@@ -125,7 +125,13 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [STATIC_DIR, ]
 
+
 # Media files
 
 MEDIA_ROOT = MEDIA_DIR
 MEDIA_URL = '/media/'
+
+
+# Redirect URLs
+
+LOGIN_URL = 'rango:login'
