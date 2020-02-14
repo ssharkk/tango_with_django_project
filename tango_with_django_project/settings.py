@@ -135,3 +135,9 @@ MEDIA_URL = '/media/'
 # Redirect URLs
 
 LOGIN_URL = 'rango:login'
+
+# Sessions and cookies settings
+
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+SESSION_COOKIE_AGE = 1209600  # 14 days in seconds
+
